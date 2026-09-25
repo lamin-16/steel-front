@@ -1,0 +1,26 @@
+{
+  "name": "steel-front",
+  "version": "7.0.0",
+  "description": "Steel Front — WWII tank combat and continental conquest. Post-quantum secured, PWA-ready, i18n in EN/DE/RU/AR.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "check": "node --check pqc.js && node --check server.js && node --check war-module.js && node --check steel-net.js"
+  },
+  "dependencies": {
+    "@noble/post-quantum": "^0.7.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
+    "helmet": "^7.1.0",
+    "peerjs": "^1.5.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["tank", "wwii", "strategy", "game", "pwa", "post-quantum", "pqc"],
+  "license": "MIT",
+  "author": "lamin"
+}

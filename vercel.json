@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "functions": {
+    "server.js": {
+      "includeFiles": "{index.html,war-module.js,pqc.js,steel-net.js,net-test.html,manifest.json,icons/**}"
+    }
+  },
+  "routes": [
+    { "src": "/(.*)", "dest": "/server.js" }
+  ]
+}

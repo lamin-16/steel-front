@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.*
+.DS_Store
+*.log
+.vscode/
+.idea/
+*.bak
+_backups/
+_backup/
+*.tmp
+*.swp
+.vercel/

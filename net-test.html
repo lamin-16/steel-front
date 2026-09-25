@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Steel Net Test</title>
+<style>
+body{background:#0a0e14;color:#fff;font-family:system-ui;padding:20px;max-width:600px;margin:auto}
+h1{color:#ffd600;letter-spacing:4px;font-size:22px}
+input,button{background:#1a1f2a;border:1px solid #4a90e2;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;font-family:inherit;margin:4px 0;width:100%}
+button{background:linear-gradient(135deg,#ffd600,#ff6d00);color:#000;font-weight:900;cursor:pointer;border:none}
+button:active{transform:scale(.96)}
+.card{background:rgba(100,180,255,.06);border:1px solid rgba(100,180,255,.2);border-radius:10px;padding:14px;margin:10px 0}
+.lbl{color:#4a90e2;font-size:10px;letter-spacing:2px;font-weight:700;margin-bottom:6px}
+.status{color:#69f0ae;font-size:12px;font-weight:700}
+.err{color:#ff5252;font-size:12px}
+.peer{background:rgba(0,200,83,.15);border-left:3px solid #69f0ae;padding:6px 10px;border-radius:6px;margin:4px 0;font-size:12px}
+</style>
+</head>
+<body>
+<h1>🌐 STEEL NET TEST</h1>
+<div class="card">
+  <div class="lbl">ROOM NAME</div>
+  <input id="room" placeholder="my-room-123" value="test-room">
+  <button onclick="host()">🎮 HOST</button>
+  <button onclick="join()">🔗 JOIN</button>
+</div>
+<div class="card">
+  <div class="lbl">STATUS</div>
+  <div id="status" class="status">Not connected</div>
+  <div id="peers"></div>
+</div>
+<div class="card">
+  <div class="lbl">SEND TEST MESSAGE</div>
+  <button onclick="sendKill()">📊 Report Kill (Score: 100)</button>
+</div>
+<div class="card">
+  <div class="lbl">LEADERBOARD (CRDT)</div>
+  <div id="lb">No scores yet</div>
+</div>
+
+<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+<script src="steel-net.js"></script>
+<script>
+function updateStatus(txt, isErr){
+  const el = document.getElementById('status');
+  el.textContent = txt;
+  el.className = isErr ? 'err' : 'status';
+}
+function updatePeers(){
+  const el = document.getElementById('peers');
+  const n = SteelNet.getConnectedCount();
+  el.innerHTML = n > 0 ? '<div class="peer">✅ ' + n + ' peer(s) connected</div>' : '';
+}
+function updateLB(){
+  const el = document.getElementById('lb');
+  const lb = SteelNet.getLeaderboard();
+  if(lb.length === 0){ el.textContent = 'No scores yet'; return; }
+  el.innerHTML = lb.map(function(e, i){
+    return '<div class="peer">' + (i+1) + '. ' + e[0].slice(-6) + ' → ' + e[1] + '</div>';
+  }).join('');
+}
+SteelNet.on('ready', function(d){
+  updateStatus('✅ Ready as ' + (d.isHost ? 'HOST' : 'GUEST') + '\nID: ' + d.id);
+});
+SteelNet.on('peer-connected', function(d){
+  updateStatus('🔗 Peer connected: ' + d.peerId.slice(-6) + (d.verified ? ' ✅ encrypted' : ' ⚠️'));
+  updatePeers();
+});
+SteelNet.on('peer-disconnected', function(d){
+  updateStatus('❌ Peer left: ' + d.peerId.slice(-6));
+  updatePeers();
+});
+SteelNet.on('leaderboard', function(){ updateLB(); });
+SteelNet.on('kill', function(){ updateLB(); });
+SteelNet.on('error', function(e){
+  updateStatus('❌ ' + e.message, true);
+});
+function host(){
+  const r = document.getElementById('room').value.trim() || 'test-room';
+  SteelNet.connect(r, { host: true });
+  updateStatus('Starting host...');
+}
+function join(){
+  const r = document.getElementById('room').value.trim() || 'test-room';
+  SteelNet.connect(r, { host: false });
+  updateStatus('Joining room...');
+}
+function sendKill(){
+  const score = Math.floor(Math.random() * 1000) + 100;
+  SteelNet.reportKill(score);
+  updateLB();
+}
+</script>
+</body>
+</html>

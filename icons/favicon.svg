@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="40%" r="70%">
+      <stop offset="0" stop-color="#1a2438"/>
+      <stop offset="1" stop-color="#05070d"/>
+    </radialGradient>
+    <linearGradient id="hullGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a8a99"/>
+      <stop offset="0.4" stop-color="#5a6a7a"/>
+      <stop offset="1" stop-color="#3a4a5a"/>
+    </linearGradient>
+    <linearGradient id="turretGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9aaabb"/>
+      <stop offset="1" stop-color="#4a5a6a"/>
+    </linearGradient>
+    <linearGradient id="trackGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a3542"/>
+      <stop offset="1" stop-color="#0a1018"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4ecdc4"/>
+      <stop offset="1" stop-color="#2a8a8a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="96" fill="url(#bgGrad)"/>
+
+  <circle cx="256" cy="230" r="180" fill="none" stroke="#4ecdc4" stroke-width="1.5" opacity="0.15"/>
+  <circle cx="256" cy="230" r="140" fill="none" stroke="#4ecdc4" stroke-width="1" opacity="0.08"/>
+
+  <rect x="86" y="360" width="340" height="56" rx="10" fill="url(#trackGrad)" stroke="#1a2430" stroke-width="2"/>
+  <g fill="#4ecdc4" opacity="0.65">
+    <circle cx="120" cy="388" r="7"/>
+    <circle cx="170" cy="388" r="7"/>
+    <circle cx="220" cy="388" r="7"/>
+    <circle cx="270" cy="388" r="7"/>
+    <circle cx="320" cy="388" r="7"/>
+    <circle cx="370" cy="388" r="7"/>
+    <circle cx="420" cy="388" r="7"/>
+  </g>
+
+  <path d="M 96 360 L 106 300 L 406 300 L 416 360 Z" fill="url(#hullGrad)" stroke="#1a2430" stroke-width="2"/>
+  <path d="M 96 360 L 106 300 L 130 300 L 124 360 Z" fill="#6a7a8a" opacity="0.5"/>
+  <path d="M 382 300 L 406 300 L 416 360 L 388 360 Z" fill="#2a3a4a" opacity="0.6"/>
+
+  <rect x="106" y="296" width="300" height="8" fill="#4a5a6a"/>
+
+  <path d="M 170 296 L 186 200 L 326 200 L 342 296 Z" fill="url(#turretGrad)" stroke="#1a2430" stroke-width="2"/>
+  <path d="M 170 296 L 186 200 L 210 200 L 200 296 Z" fill="#aabaCB" opacity="0.35"/>
+  <path d="M 306 200 L 326 200 L 342 296 L 320 296 Z" fill="#2a3a4a" opacity="0.5"/>
+
+  <rect x="240" y="176" width="32" height="28" fill="#4a5a6a" stroke="#1a2430" stroke-width="2"/>
+  <circle cx="256" cy="190" r="6" fill="#0a1018"/>
+
+  <rect x="322" y="222" width="170" height="18" rx="3" fill="url(#turretGrad)" stroke="#1a2430" stroke-width="2"/>
+  <rect x="322" y="222" width="170" height="6" fill="#aabbcc" opacity="0.3"/>
+  <rect x="478" y="216" width="24" height="30" rx="4" fill="#3a4a5a" stroke="#1a2430" stroke-width="2"/>
+  <rect x="480" y="218" width="20" height="4" fill="#4ecdc4" opacity="0.4"/>
+
+  <rect x="130" y="320" width="80" height="4" fill="url(#accentGrad)" opacity="0.6"/>
+  <rect x="130" y="328" width="60" height="3" fill="url(#accentGrad)" opacity="0.4"/>
+
+  <circle cx="380" cy="330" r="8" fill="#ffd600" opacity="0.8"/>
+  <circle cx="380" cy="330" r="4" fill="#ff9800"/>
+</svg>
